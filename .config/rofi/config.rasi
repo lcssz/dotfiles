@@ -1,0 +1,122 @@
+// Config //
+configuration {
+    show-icons: true;
+    drun-display-format: "{name}";
+    modi: "drun,run,filebrowser";
+		display-drun: "";
+    display-run:	"";
+    display-filebrowser: "";
+		font: "Iosevka Nerd Font 11";
+}
+
+@import "theme.rasi"
+
+// Main //
+window {
+    transparency: "real";
+    width: 35%;
+    height: 42%;
+    spacing: 0em;
+    padding: 0em;
+    background-color: transparent;
+    border-radius: 10px;
+    border: 1px;
+    border-color: @highlight-med;
+}
+
+mainbox {
+    orientation: horizontal;
+    children: [leftbox, rigthbox];
+    padding: 0em;
+		spacing: 0em;
+}
+
+
+// Content Areas //
+leftbox {
+    background-color: @bg-surface;
+    orientation: horizontal;
+    padding: 0.4em;
+    children: [ listbox ];
+}
+
+rigthbox {
+    width: 12%;
+    expand: false;
+    background-image: url("./assets/tanjiro.jpg", width);
+}
+
+listbox {
+    expand: true;
+    children: [inputbar, listview, mode-switcher];
+}
+
+
+// Input Section //
+inputbar {
+    spacing: 2px;
+    children: [textbox-prompt-colon, entry];
+    background-color: @bg-overlay;
+    border-radius: 8px;
+}
+
+textbox-prompt-colon {
+    font: "Iosevka Nerd Font 22";
+    text-color: @accent-primary;
+    padding: 0.1em 0.6em 0.1em 0.2em;
+    str: "󰣇";
+}
+
+entry {
+    padding: 0.25em 0em;
+    placeholder: "Search";
+    text-color: @text-primary;
+    placeholder-color: @text-muted;
+}
+
+// Mode Switcher //
+mode-switcher {
+    text-color: @accent-primary;
+}
+
+button {
+    padding: 0.2em;
+    border-radius: 8px;
+    text-color: inherit;
+    cursor: pointer;
+}
+
+
+// List View //
+listview {
+    spacing: 4px;
+    scrollbar: false;
+    padding: 0.3em 0em;
+}
+
+element {
+    border-radius: 5px;
+    padding: 0.3em;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @highlight-low;
+    border-color: @accent-primary;
+}
+
+element-text {
+    text-color: @text-subtle;
+}
+
+element-text selected {
+    text-color: @accent-secondary;
+}
+
+element-icon {
+    size: 1em;
+    background-color: transparent;
+}

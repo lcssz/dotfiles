@@ -1,0 +1,74 @@
+configuration {
+    modi: "emoji";
+    show-icons: false;
+}
+
+@import "theme.rasi"
+
+*{
+    background-color: @bg-base;
+  	text-color: @text-primary;   
+}
+
+window {
+		width: 12em;
+		height: 12em;
+    background-color: @bg-base;
+    border: 2px;
+    border-color: @accent-primary;
+    border-radius: 12px;    
+
+		location: southeast;
+    anchor: southeast;
+		x-offset: -80px;
+    y-offset: -50px;
+}
+
+mainbox {
+    background-color: transparent;
+    padding: 8px;
+}
+
+inputbar {
+    background-color: @bg-surface;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 0 0 12px 0;
+		children: [entry];
+}
+
+entry {
+    text-color: @text-primary;
+    placeholder: "Find emoji...";
+    placeholder-color: @text-muted;
+}
+
+listview {
+    lines: 4;
+    columns: 4;
+    background-color: transparent;
+    spacing: 8px;
+    cycle: false;
+    dynamic: true;
+    layout: vertical;
+}
+
+element {
+    background-color: @bg-surface;
+    border-radius: 100%;
+    padding: 2px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+    font: "Twitter Color Emoji 14";
+    horizontal-align: 0.5;
+}
+
+element selected {
+    background-color: @bg-overlay;
+    text-color: @accent-tertiary;
+    border: 1px;
+    border-color: @accent-primary;
+}
