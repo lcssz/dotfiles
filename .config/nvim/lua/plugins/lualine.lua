@@ -4,7 +4,7 @@ return {
 		'nvim-tree/nvim-web-devicons'
 	},
 	opts = {
-		theme = 'rose-pine'
+		theme = 'fluoromachine'
 	},
 	config = function(_, opts)
 		require('lualine').setup(opts)

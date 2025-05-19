@@ -44,11 +44,11 @@ zinit cdreplay -q
 bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
-bindkey '^w' backward-kill-line
+# bindkey '^w' backward-kill-line
 
 # Helpful aliases
 alias c='clear' # clear terminal
-alias l='eza -lh --icons=auto' # long list
+alias l='eza -lh --icons=auto --group-directories-first' # long list
 alias ls='eza -1 --icons=auto' # short list
 alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
 alias ld='eza -lhD --icons=auto' # long list dirs
@@ -60,6 +60,7 @@ alias pa='yay -Ss' # list available package
 alias pc='yay -Sc' # remove unused cache
 alias po='yay -Qtdq | yay -Rns -' # remove unused packages, also try > yay -Qqd | yay -Rsu --print -
 alias v='nvim'
+alias cat='bat'
 
 
 # Directory navigation shortcuts
@@ -87,7 +88,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 
 # Add directories to PATH
-export PATH="$HOME/.local/share/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/.local/share/bin:$HOME/.dotnet/tools:$PATH"
 
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
@@ -100,9 +101,22 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 eval "$(fzf --zsh)"
 eval "$(zoxide init zsh)"
 
+# Yazi shell wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
 # bun completions
 [ -s "/home/lcssz/.bun/_bun" ] && source "/home/lcssz/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -f "/home/lcssz/.ghcup/env" ] && . "/home/lcssz/.ghcup/env" # ghcup-env
+export OLLAMA_MODELS="/storage/ollama-models"

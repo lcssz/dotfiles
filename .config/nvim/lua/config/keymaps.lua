@@ -1,5 +1,6 @@
 local M = {}
 local builtin = require('telescope.builtin')
+local harpoon = require('harpoon')
 
 -- Helper function for setting keymaps
 local function map(mode, lhs, rhs, opts)
@@ -15,6 +16,14 @@ local function setup_insert_mode_navigation()
 	map("i", "<C-l>", "<Right>", { desc = "Move right" })
 	map("i", "<C-j>", "<Down>", { desc = "Move down" })
 	map("i", "<C-k>", "<Up>", { desc = "Move up" })
+end
+
+-- Harpoon mappings
+local function setup_harpoon_mappings()
+	map('n', "<leader>a", function() harpoon:list():add() end, { desc = "[A]dd file on Harpoon" })
+	map('n', "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Explore harpoon files" })
+	map('n', "<C-S-N>", function() harpoon:list():next() end, { desc = "Next file from harpoon list" })
+	map('n', "<C-S-P>", function() harpoon:list():prev() end, { desc = "Previous file from harpoon list" })
 end
 
 -- General normal mode mappings
@@ -61,6 +70,7 @@ function M.setup()
 	setup_insert_mode_navigation()
 	setup_normal_mode_basics()
 	setup_telescope_mappings()
+	setup_harpoon_mappings()
 end
 
 return M

@@ -1,12 +1,22 @@
 return {
 	'neovim/nvim-lspconfig',
-	dependencies = { 'saghen/blink.cmp' },
+	dependencies = {
+		'saghen/blink.cmp',
+	},
 	opts = {
 		servers = {
 			clangd = {},
+			html = {},
 			zls = {},
-			ts_ls = {},
+			hls = {
+				cmd = { 'haskell-language-server-wrapper', '--lsp' },
+				filetypes = { 'haskell', 'lhaskell', 'cabal' },
+			},
+			gopls = {},
 			pyright = {},
+			omnisharp = {
+				cmd = { "dotnet", "/home/lcssz/.wine/dosdevices/z:/usr/lib/omnisharp-roslyn/OmniSharp.dll" },
+			},
 			lua_ls = {
 				settings = {
 					Lua = {

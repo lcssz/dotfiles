@@ -1,0 +1,4 @@
+:set prompt "λ> "
+:set editor "nvim"
+
+:def! c \_ -> return ":!clear"
